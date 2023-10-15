@@ -3,14 +3,12 @@ import styled from "styled-components";
 import Button from "./Components/Button";
 import Favourites from "./Components/Favourites";
 import Header from "./Components/Header";
-import Random from "./Components/Random";
 import Search from "./Components/Search";
 import Trending from "./Components/Trending";
 import { useGlobal } from "./context/global";
 import { useTheme } from "./context/themeContext";
 
 function App() {
-  const {randomGiff} = useGlobal()
   const theme = useTheme()
 
   //state
@@ -22,8 +20,6 @@ function App() {
         return <Trending />
       case 'liked':
         return <Favourites rendered={rendered} />
-      case 'random':
-        return <Random />
       case 'search':
         return <Search />
       default:
@@ -47,14 +43,6 @@ function App() {
           icon={<i className="fa-solid fa-arrow-trend-up"></i>}
           onClick={() => {
             setRendered('trending')
-          }}
-        />
-        <Button 
-          name={'Random Gif'}
-          icon={<i className="fa-solid fa-shuffle"></i>}
-          onClick={() => {
-            setRendered('random')
-            randomGiff()
           }}
         />
       </div>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
 import { globalReducer } from "../reducers/globalReducer";
-import { ADD_TO_FAVORITES, GET_FAVOURITES, GET_RANDOM, GET_SEARCH, GET_TRENDING, LOADING } from "../utils/globalActions";
+import { ADD_TO_FAVORITES, GET_FAVOURITES,GET_SEARCH, GET_TRENDING, LOADING } from "../utils/globalActions";
 
 const apiKey = process.env.REACT_APP_API_KEY;
 const baseUrl = "https://api.giphy.com/v1/gifs"
@@ -29,14 +29,6 @@ export const GlobalProvider = ({children}) => {
         const res = await axios.get(`${baseUrl}/trending?api_key=${apiKey}&limit=30`)
         dispatch({type: GET_TRENDING, payload: res.data.data})
     }
-
-    //random giff
-    const randomGiff = async () =>{
-        dispatch({type: LOADING})
-        const res = await axios.get(`${baseUrl}/random?api_key=${apiKey}`)
-        dispatch({type: GET_RANDOM, payload: res.data.data})
-    }
-
 
     //search
     const searchGiffs = async (query) => {
@@ -79,14 +71,12 @@ export const GlobalProvider = ({children}) => {
     //initial renders
     useEffect(() => {
         getTrending()
-        randomGiff()
         getFromLocalStorage()
     }, [])
 
     return (
         <GlobalContext.Provider value={{
             ...state,
-            randomGiff,
             searchGiffs,
             saveToFavourites,
             removeFromLocalStorage

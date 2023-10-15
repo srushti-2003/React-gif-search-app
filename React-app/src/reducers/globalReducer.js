@@ -1,4 +1,4 @@
-import { ADD_TO_FAVORITES, GET_FAVOURITES, GET_RANDOM, GET_SEARCH, GET_TRENDING, LOADING } from "../utils/globalActions"
+import { ADD_TO_FAVORITES, GET_FAVOURITES, GET_SEARCH, GET_TRENDING, LOADING } from "../utils/globalActions"
 
 export const globalReducer = (state, action) => {
 
@@ -10,12 +10,6 @@ export const globalReducer = (state, action) => {
                 ...state, 
                 loading: false, 
                 trending: action.payload
-            }
-        case GET_RANDOM:
-            return {
-                ...state,
-                loading: false,
-                random: action.payload
             }
         case GET_SEARCH:
             return {
